@@ -1,4 +1,4 @@
-module pdb_top #(
+module cpu #(
     parameter TLB_NUM   = 16 ,
     parameter IDX_W     = $clog2(TLB_NUM)
 )(
