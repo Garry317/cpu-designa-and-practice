@@ -103,7 +103,7 @@ wire [127:0] data_wr_data ;
 wire        data_wr_rdy ;
 
 //cpu
-pdb_top pdip(
+cpu cpu(
     .clk                (aclk               ),
     .resetn             (aresetn            ),  //low active
     .ex_int_in          (int_in             ),

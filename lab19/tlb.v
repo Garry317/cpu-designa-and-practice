@@ -97,10 +97,10 @@ module tlb #(
     assign s0_kseg1  = s0_vpn2[18:15]>4'h9 && s0_vpn2[18:15]<4'hC ;
     assign map_flag1 = (s1_vpn2[18:15]<4'h8)||(s1_vpn2[18:15]>4'hB)||s1_tlbp ;
     assign s1_kseg1  = s1_vpn2[18:15]>4'h9 && s1_vpn2[18:15]<4'hC ;
-    assign cache_flag0 = 1'b0 ; //(c0<=3'd3 && (s0_vpn2[18:15]>4'hB || s0_vpn2[18:15]<4'h8))||
-                         //(cfg_k0<=3'd3 && (s0_vpn2[18:15]>4'h7 && s0_vpn2[18:15]<4'hA)) ;
-    assign cache_flag1 = 1'b0 ;//(c1<=3'd3 && (s1_vpn2[18:15]>4'hB || s1_vpn2[18:15]<4'h8))||
-                         //(cfg_k0<=3'd3 && (s1_vpn2[18:15]>4'h7 && s1_vpn2[18:15]<4'hA)) ; 
+    assign cache_flag0 = (c0<=3'd3 && (s0_vpn2[18:15]>4'hB || s0_vpn2[18:15]<4'h8))||
+                         (cfg_k0<=3'd3 && (s0_vpn2[18:15]>4'h7 && s0_vpn2[18:15]<4'hA)) ;
+    assign cache_flag1 = (c1<=3'd3 && (s1_vpn2[18:15]>4'hB || s1_vpn2[18:15]<4'h8))||
+                         (cfg_k0<=3'd3 && (s1_vpn2[18:15]>4'h7 && s1_vpn2[18:15]<4'hA)) ; 
    // serch logic
     generate
         for(i=0;i<TLB_NUM;i++) begin

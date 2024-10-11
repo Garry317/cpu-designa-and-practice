@@ -199,7 +199,7 @@ module dcache #(
                          replace_rd ? replace_way : 
                          invalid_wr ? {~tag[0],tag[0]} :
                        store_tag_wr ? {~tag[0],tag[0]} :
-                     hit_invalid_wr ? {~tag_lat[0],tag_lat[0]} :
+                     hit_invalid_wr ? tag_hit :
                                        refill_way ;
     assign tagv_d       = idx_invalid ? {tag_lat,1'b0} : 
                         idx_store_tag ? {tag,offset[1]} :
@@ -303,6 +303,10 @@ module dcache #(
         else if(main_st==M_LOOKUP & main_nst==M_MISS & cache_en_lat) begin
             replace_way  <= lfsr_data  ;
             dirty_flag   <= d_table[lfsr_data][index_lat] ;
+        end
+        else if(main_nst==M_MISS && hit_invalid_wb_lat) begin
+            replace_way  <= tag_hit[1] ;
+            dirty_flag   <= d_table[tag_hit[1]][index_lat] ;
         end
 
     // replace logic
